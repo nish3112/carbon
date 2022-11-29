@@ -1,3 +1,4 @@
+import 'package:cryptoapp/PaymentSelectionScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:cool_dropdown/cool_dropdown.dart';
 
@@ -17,6 +18,8 @@ class _BuyAssetState extends State<BuyAsset> {
     {'label': 'USDC', 'value': 'USDC'},
     {'label': 'TRX', 'value': 'TRX'},
   ];
+
+  TextEditingController rupee = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -46,43 +49,48 @@ class _BuyAssetState extends State<BuyAsset> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        Image.asset(
-                          'assets/images/card.jpg',
-                          height: 45,
-                          width: 45,
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Text(
-                              "Select payment method",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Text(
-                                "Credit, debit card, UPI",
+                    TextButton(
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            'assets/images/card.jpg',
+                            height: 45,
+                            width: 45,
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Text(
+                                "Select payment method",
                                 style: TextStyle(
-                                    color: Colors.blueGrey,
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 14),
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18),
                               ),
-                            )
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
-                          child: Icon(Icons.keyboard_arrow_right_rounded),
-                        ),
-                      ],
+                              Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  "Credit, debit card, UPI",
+                                  style: TextStyle(
+                                      color: Colors.blueGrey,
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 14),
+                                ),
+                              )
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
+                            child: Icon(Icons.keyboard_arrow_right_rounded),
+                          ),
+                        ],
+                      ),
+                      onPressed:(){
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => PaymentSelectionScreen()));
+                      },
                     ),
                   ],
                 ),
@@ -104,6 +112,7 @@ class _BuyAssetState extends State<BuyAsset> {
                   Container(
                     width: 100,
                     child: TextField(
+                      controller: rupee,
                       style: TextStyle(
                         fontSize: 40,
                       ),

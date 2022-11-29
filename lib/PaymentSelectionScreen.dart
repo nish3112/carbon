@@ -1,6 +1,7 @@
 import 'package:cryptoapp/Componenets.dart';
 import "package:flutter/material.dart";
 
+
 class PaymentSelectionScreen extends StatefulWidget {
   const PaymentSelectionScreen({Key? key}) : super(key: key);
 
@@ -34,10 +35,11 @@ class _PaymentSelectionScreenState extends State<PaymentSelectionScreen> {
                 ),
                 SizedBox(height: 50,),
                 Column(
+                  //TODO NOT WORKING
                   children: [
-                    PaymentCard(paymentMethod: "Visa MasterCard"),
-                    PaymentCard(paymentMethod: "Apple Pay"),
-                    PaymentCard(paymentMethod: "UPI")
+                    PaymentCard(paymentMethod: 'Credit Card',),
+                    PaymentCard(paymentMethod: 'Debit Card',),
+                    PaymentCard(paymentMethod: 'Gpay',),
                   ],
                 ),
                 SizedBox(height: 20,),
@@ -64,7 +66,6 @@ class _PaymentSelectionScreenState extends State<PaymentSelectionScreen> {
                             ),
                           ],
                         ),
-
                       ],
                     ),
                   ],
