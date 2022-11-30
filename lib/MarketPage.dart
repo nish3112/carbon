@@ -1,8 +1,14 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:cryptoapp/BuyAsset.dart';
 import 'package:cryptoapp/Componenets.dart';
+import 'package:cryptoapp/HomeScreen.dart';
+import 'package:cryptoapp/Profile.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:custom_navigation_bar/custom_navigation_bar.dart';
+
+
 
 class MarketPage extends StatefulWidget {
   @override
@@ -35,6 +41,13 @@ class _MarketPageState extends State<MarketPage> {
     }
   }
 
+  final pages = [
+    HomeScreen(),
+    BuyAsset(),
+    MarketPage(),
+    Profile()
+  ];
+
   @override
   void initState() {
     fetchCoin();
@@ -42,100 +55,134 @@ class _MarketPageState extends State<MarketPage> {
     super.initState();
   }
 
+  int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset : false,
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(25, 35, 0, 0),
-              child: Row(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text(
-                        "in the past 24 hours",
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 15,
+    return MaterialApp(
+      home: Scaffold(
+        resizeToAvoidBottomInset : false,
+        backgroundColor: Colors.white,
+        body: SafeArea(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(25, 35, 0, 0),
+                child: Row(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text(
+                          "in the past 24 hours",
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 15,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "Market is up",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
+                        SizedBox(
+                          height: 10,
                         ),
-                      ),
-                    ],
-                  ),
-                  const Spacer(),
-                  const Padding(
-                    padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    child: Text("+9.17%",
-                      style: TextStyle(
-                          color: Colors.green,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18
+                        Text(
+                          "Market is up",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Spacer(),
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                      child: Text("+9.17%",
+                        style: TextStyle(
+                            color: Colors.green,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18
+                        ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Image.asset('assets/images/market.jpg', height: 60, width: 60,),
-                  ),
-                ],
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.asset('assets/images/market.jpg', height: 60, width: 60,),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            new Spacer(),
-            Container(
-              width: MediaQuery.of(context).size.width-40,
-              child: TextField(
-                decoration: new InputDecoration(
-                  prefixIcon: Icon(Icons.search),
-                  labelText: "Crytpocurrencies",
-                  enabledBorder: const OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                    borderSide: const BorderSide(
-                      color: Colors.grey,
+              new Spacer(),
+              Container(
+                width: MediaQuery.of(context).size.width-40,
+                child: TextField(
+                  decoration: new InputDecoration(
+                    prefixIcon: Icon(Icons.search),
+                    labelText: "Crytpocurrencies",
+                    enabledBorder: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                      borderSide: const BorderSide(
+                        color: Colors.grey,
+                      ),
                     ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                    borderSide: BorderSide(color: Colors.blue),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                      borderSide: BorderSide(color: Colors.blue),
+                    ),
                   ),
                 ),
               ),
-            ),
-            new Spacer(),
-            Container(
-              height: MediaQuery.of(context).size.height / 1.5,
-              width: MediaQuery.of(context).size.width,
-              child: ListView.builder(
-                scrollDirection: Axis.vertical,
-                itemCount: coinList.length,
-                itemBuilder: (context, index) {
-                  return CoinCard(
-                    name: coinList[index].name,
-                    symbol: coinList[index].symbol,
-                    imageUrl: coinList[index].imageUrl,
-                    price: coinList[index].price.toDouble(),
-                    change: coinList[index].change.toDouble(),
-                    changePercentage:
-                        coinList[index].changePercentage.toDouble(),
-                  );
-                },
+              new Spacer(),
+              Container(
+                height: MediaQuery.of(context).size.height / 1.5,
+                width: MediaQuery.of(context).size.width,
+                child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemCount: coinList.length,
+                  itemBuilder: (context, index) {
+                    return CoinCard(
+                      name: coinList[index].name,
+                      symbol: coinList[index].symbol,
+                      imageUrl: coinList[index].imageUrl,
+                      price: coinList[index].price.toDouble(),
+                      change: coinList[index].change.toDouble(),
+                      changePercentage:
+                          coinList[index].changePercentage.toDouble(),
+                    );
+                  },
+                ),
               ),
+              Spacer(),
+            ],
+          ),
+        ),
+        bottomNavigationBar: CustomNavigationBar(
+
+          backgroundColor: Colors.white60,
+          items: [
+            CustomNavigationBarItem(
+              icon: Image.asset('assets/images/home_final.png'),
+              title: Text(""),
+            ),
+            CustomNavigationBarItem(
+              icon: Image.asset('assets/images/exchange_final.png'),
+              title: Text(""),
+            ),
+            CustomNavigationBarItem(
+              icon: Image.asset('assets/images/market_final.png'),
+              title: Text(""),
+            ),
+            CustomNavigationBarItem(
+              icon: Image.asset('assets/images/profile_final.png'),
+              title: Text(""),
             ),
           ],
+          currentIndex: _currentIndex,
+          onTap: (index) {
+            setState(() {
+              _currentIndex = index;
+              Navigator.push(context, MaterialPageRoute(builder: (context) => pages[index]));
+
+            });
+          },
         ),
       ),
     );

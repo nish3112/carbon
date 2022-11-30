@@ -1,10 +1,10 @@
-import 'package:cryptoapp/Login.dart';
-import 'package:cryptoapp/MarketPage.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/material.dart';
-import 'package:cryptoapp/Componenets.dart';
+
 import 'package:flutter/scheduler.dart' show timeDilation;
+
 
 class signup extends StatefulWidget {
   const signup({Key? key}) : super(key: key);
@@ -119,7 +119,7 @@ class _signupState extends State<signup> {
                     ElevatedButton(
                       onPressed: () {
                         FirebaseAuth.instance.createUserWithEmailAndPassword(email: email.text, password: password.text).then((value){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=> MarketPage()));
+                          Navigator.pushNamed(context, '/');
                         }).onError((error, stackTrace) {
                           print("Error");
                         });
@@ -162,13 +162,13 @@ class _signupState extends State<signup> {
                       height: 15,
                     ),
                     TextButton(child: Text('Alredy registered ? Sign In' ), onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
+                      Navigator.pushNamed(context, '/login');
                     },),
                   ]
                   ,
                 ),
               ],
-              
+
             ),
           ),
         ),

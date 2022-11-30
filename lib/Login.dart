@@ -1,5 +1,3 @@
-import 'package:cryptoapp/MarketPage.dart';
-import 'package:cryptoapp/signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -65,7 +63,7 @@ class _LoginState extends State<Login> {
               ElevatedButton(
                 onPressed: () {
                     FirebaseAuth.instance.signInWithEmailAndPassword(email: email.text, password: password.text).then((value){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>MarketPage()));
+                      Navigator.pushNamed(context, '/');
                     }).onError((error, stackTrace) {
                       print("Invalid Password");
                       print(error);
@@ -84,7 +82,7 @@ class _LoginState extends State<Login> {
                 ),
               ),
               TextButton(onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>signup()));
+                Navigator.pushNamed(context, '/signup');
               }, child: Text("Don't have an account? Create one"))
             ],
           ),
