@@ -31,19 +31,8 @@ void main() async {
   runApp(
     MaterialApp(
       theme: ThemeData(fontFamily: 'DynaPuff'),
-      initialRoute: '/splash',
-      routes: {
-        '/': (context) => HomeScreen(),
-        '/splash': (context) => SplashScreen(),
-        '/login': (context) => Login(),
-        '/signup': (context) => signup(),
-        '/buy': (context) => BuyAsset(),
-        '/payment_selection': (context) => PaymentSelectionScreen(),
-        '/market': (context) => MarketPage(),
-        '/success': (context) => SuccessPage(),
-        '/fail': (context) => FailPage(),
-        '/profile': (context) => Profile(),
-      },
+      home: SplashScreen(),
+
     ),
   );
 }

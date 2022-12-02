@@ -1,10 +1,11 @@
-
+import 'package:cryptoapp/Login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 
 import 'package:flutter/scheduler.dart' show timeDilation;
 
+import 'HomeScreen.dart';
 
 class signup extends StatefulWidget {
   const signup({Key? key}) : super(key: key);
@@ -16,6 +17,7 @@ class signup extends StatefulWidget {
 class _signupState extends State<signup> {
   TextEditingController email = new TextEditingController();
   TextEditingController password = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,155 +27,168 @@ class _signupState extends State<signup> {
           backgroundColor: Colors.white,
           elevation: 0,
           automaticallyImplyLeading: true,
-          title:const Text("Sign Up", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Colors.black),),
+          title: const Text(
+            "Sign Up",
+            style: TextStyle(
+                fontSize: 25, fontWeight: FontWeight.bold, color: Colors.black),
+          ),
         ),
-        body: SafeArea(
+        body: Builder(
+          builder: (context)=>SafeArea(
           child: Container(
             child: Column(
               children: [
-                SizedBox(height: 5,),
-                Center(
-                  child: Text("It only takes a minute to create your account", style: TextStyle(color: Colors.grey[800],fontSize: 15)
-                  ),
+                SizedBox(
+                  height: 5,
                 ),
-                SizedBox(height: 50,),
-
+                Center(
+                  child: Text("It only takes a minute to create your account",
+                      style: TextStyle(color: Colors.grey[800], fontSize: 15)),
+                ),
+                SizedBox(
+                  height: 50,
+                ),
                 Column(
                   children: [
-                    TextFormField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(20),
-                          ),
+                    Padding(
+                      padding: EdgeInsets.all(15),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width - 50,
+                        child: TextField(
+                          style: TextStyle(color: Colors.black),
+                          cursorColor: Colors.black,
+                          decoration: InputDecoration(
+                              focusColor: Colors.black,
+                              border: OutlineInputBorder(
+                                borderSide:
+                                    const BorderSide(color: Colors.white),
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              hintText: 'First Name',
+                              hintStyle: TextStyle(color: Colors.black)),
                         ),
-                        hintText: 'First Name',
-                        labelText: 'First Name',
-
-                        contentPadding: EdgeInsets.all(20.0),
                       ),
                     ),
-                    SizedBox(
-                      height: 25,
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(20),
-                          ),
+                    Padding(
+                      padding: EdgeInsets.all(15),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width - 50,
+                        child: TextField(
+                          style: TextStyle(color: Colors.black),
+                          cursorColor: Colors.black,
+                          decoration: InputDecoration(
+                              focusColor: Colors.black,
+                              border: OutlineInputBorder(
+                                borderSide:
+                                    const BorderSide(color: Colors.white),
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              hintText: 'Last Name',
+                              hintStyle: TextStyle(color: Colors.black)),
                         ),
-                        hintText: 'Last Name',
-                        labelText: 'Last Name',
-                        contentPadding: EdgeInsets.all(20.0),
-                      ),
-                    ),SizedBox(
-                      height: 25,
-                    ),
-                    TextFormField(
-                      controller: email,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(20),
-                          ),
-                        ),
-                        hintText: 'Email Id',
-                        labelText: 'Email Id',
-                        contentPadding: EdgeInsets.all(20.0),
                       ),
                     ),
-                    SizedBox(
-                      height: 25,
-                    ),
-                    TextFormField(
-                      controller: password,
-                      decoration: InputDecoration(
-                      suffixIcon: Icon(Icons.remove_red_eye),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(20),
-                          ),
+                    Padding(
+                      padding: EdgeInsets.all(15),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width - 50,
+                        child: TextField(
+                          style: TextStyle(color: Colors.black),
+                          cursorColor: Colors.black,
+                          controller: email,
+                          decoration: InputDecoration(
+                              focusColor: Colors.black,
+                              border: OutlineInputBorder(
+                                borderSide:
+                                    const BorderSide(color: Colors.white),
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              hintText: 'Email Address',
+                              hintStyle: TextStyle(color: Colors.black)),
                         ),
-                        hintText: 'Password',
-                        labelText: 'Password',
-                        contentPadding: EdgeInsets.all(20.0),
                       ),
                     ),
-                    SizedBox(
-                      height: 25,
+                    Padding(
+                      padding: EdgeInsets.all(15),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width - 50,
+                        child: TextField(
+                          style: TextStyle(color: Colors.black),
+                          cursorColor: Colors.black,
+                          controller: password,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                              focusColor: Colors.black,
+                              border: OutlineInputBorder(
+                                borderSide:
+                                    const BorderSide(color: Colors.white),
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              hintText: 'Password',
+                              hintStyle: TextStyle(color: Colors.black)),
+                        ),
+                      ),
                     ),
                     CheckboxListTile(
-
-                      title: const Text('I agree to the cryptoland terms of services and Privacy Policy'),
-                      value: timeDilation != 1.0,
-                      onChanged: (bool? value) {
-                        setState(() {
-                          timeDilation = value! ? 5.0 : 1.0;
-                        });
-                      },
-                    ),
+                        controlAffinity: ListTileControlAffinity.leading,
+                        title: Text(
+                            "I agree to carbon's terms of services and Privacy Policy"),
+                        value: timeDilation != 1.0,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            timeDilation = value! ? 2.0 : 1.0;
+                          });
+                        }),
                     SizedBox(
                       height: 25,
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        FirebaseAuth.instance.createUserWithEmailAndPassword(email: email.text, password: password.text).then((value){
-                          Navigator.pushNamed(context, '/');
-                        }).onError((error, stackTrace) {
-                          print("Error");
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30.0)
-                          ),
-                          primary: Colors.blue
-                      ),
-                      child: Text(
-                        "Create Account",
-                        style: TextStyle(color: Colors.white, fontSize: 18),
+                    Container(
+                      width: MediaQuery.of(context).size.width - 50,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          FirebaseAuth.instance
+                              .createUserWithEmailAndPassword(
+                                  email: email.text, password: password.text)
+                              .then((value) {
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeScreen()));
+                          }).onError((error, stackTrace) {
+                            final snackBar = SnackBar(
+                              content: const Text('Error signing up! Please try again'),
+                              action: SnackBarAction(
+                                label: 'OK',
+                                onPressed: () {},
+                              ),
+                            );
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            });
+                        },
+                        style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 40.0, vertical: 20.0),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30.0)),
+                            primary: Color(0xFF0814c4)
+                        ),
+                        child: Text(
+                          "Create Account",
+                          style: TextStyle(color: Colors.white, fontSize: 18),
+                        ),
                       ),
                     ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text('OR' ),
 
-                    SizedBox(
-                      height: 10,
+                    TextButton(
+                      child: Text('Already registered? Sign In',style: TextStyle(color : Color(0xFF0814c4)),),
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
+                      },
                     ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30.0)
-                          ),
-                          primary: Colors.white
-                      ),
-                      child: Text(
-                        "Sign Up with Google",
-                        style: TextStyle(color: Colors.black, fontSize: 14 ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    TextButton(child: Text('Alredy registered ? Sign In' ), onPressed: (){
-                      Navigator.pushNamed(context, '/login');
-                    },),
-                  ]
-                  ,
+                  ],
                 ),
               ],
-
             ),
           ),
         ),
-
       ),
-    );
+    ));
   }
 }

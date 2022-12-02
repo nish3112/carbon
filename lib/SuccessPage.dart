@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'MarketPage.dart';
 
 class SuccessPage extends StatelessWidget {
-  const SuccessPage({Key? key}) : super(key: key);
+  int rupee = 0;
+  SuccessPage({required this.rupee});
 
   @override
   Widget build(BuildContext context) {
@@ -29,16 +30,16 @@ class SuccessPage extends StatelessWidget {
                     height: 25,
                   ),
                   Text(
-                    "Congratulations!!!",
-                    style: TextStyle(fontSize: 20),
+                    "Your payment was successful",
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Colors.green),
                   ),
                   Text(
-                    "Your order was ",
-                    style: TextStyle(fontSize: 20),
+                    "Your order for \u{20B9} $rupee was ",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal,color: Colors.grey[900]),
                   ),
                   Text(
-                    "succesfully placed",
-                    style: TextStyle(fontSize: 20),
+                    "succesfully executed",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal,color: Colors.grey[900])
                   ),
                 ],
               ),

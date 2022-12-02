@@ -1,4 +1,6 @@
+import 'package:cryptoapp/FailPage.dart';
 import 'package:cryptoapp/PaymentSelectionScreen.dart';
+import 'package:cryptoapp/SuccessPage.dart';
 import 'package:flutter/material.dart';
 import 'package:cool_dropdown/cool_dropdown.dart';
 
@@ -11,7 +13,7 @@ class BuyAsset extends StatefulWidget {
 
 class _BuyAssetState extends State<BuyAsset> {
   List dropdownItemList = [
-    {'label': 'BTC', 'value': 'BTC'}, // label is required and unique
+    {'label': 'BTC', 'value': 'BTC'},
     {'label': 'ETH', 'value': 'ETH'},
     {'label': 'XRP', 'value': 'XRP'},
     {'label': 'USDT', 'value': 'USDT'},
@@ -20,6 +22,7 @@ class _BuyAssetState extends State<BuyAsset> {
   ];
 
   TextEditingController rupee = new TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -89,6 +92,7 @@ class _BuyAssetState extends State<BuyAsset> {
                         ],
                       ),
                       onPressed:(){
+
                         Navigator.of(context).push(MaterialPageRoute(builder: (context) => PaymentSelectionScreen()));
                       },
                     ),
@@ -151,7 +155,14 @@ class _BuyAssetState extends State<BuyAsset> {
                           RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18.0),
                           ))),
-                    onPressed: () {},
+                    onPressed: () {
+                      int buy_amount = int.parse(rupee.text);
+                      if(buy_amount<100){
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> FailPage()));
+                      }else {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => SuccessPage(rupee: buy_amount)));
+                      }
+                    },
                     child: Text('Buy', style: TextStyle(
                       color: Colors.white,
                       fontSize: 15
